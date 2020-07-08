@@ -1,0 +1,1 @@
+this will hold the k3s config for the example website 

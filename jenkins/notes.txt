@@ -1,0 +1,1 @@
+this will hold notes on the jenkins pipeline config 
