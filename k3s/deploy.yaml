@@ -1,0 +1,46 @@
+# deploy.yaml
+# author : andrew@openmarmot.com
+# last update : July 08 2020
+
+#requires my bash script to replace env variables with values
+
+# describe service to get the nodeport (easier to let kubernetes pick it)
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: health-openmarmot-com-service
+spec:
+  selector:
+    app: health-openmarmot-com
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+  type: NodePort
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: health-openmarmot-com-deployment
+  labels:
+    app: health-openmarmot-com
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: health-openmarmot-com
+  template:
+    metadata:
+      labels:
+        app: health-openmarmot-com
+    spec:
+      containers:
+      - name: health-openmarmot-com
+        image: ${aws_account}.dkr.ecr.us-west-2.amazonaws.com/health.openmarmot.com:latest
+        ports:
+      imagePullSecrets:
+      - name: us-west-2-ecr-registry

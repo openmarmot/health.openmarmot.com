@@ -1,1 +1,12 @@
 this will hold the k3s config for the example website 
+
+# AWS Elastic Container Registry Integration
+I'm using my ECR solution : https://github.com/openmarmot/ecr_with_kubernetes
+
+
+# k3s_deploy.sh
+this is a handy script that coverts references to environment variables in the
+yaml file to the actual values of the env variables (ask kubectl won't do this 
+on its own)
+
+Note how I'm using it to get the aws account number. pretty neat
